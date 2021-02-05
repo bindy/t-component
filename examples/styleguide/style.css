@@ -1,0 +1,52 @@
+*{
+    margin:0
+}
+h3{
+  margin:20px 0
+}
+main.rsg--content-3{
+  max-width: 850px;
+  margin:0
+}
+.icon-layout .el-row{
+    margin:20px 0
+}
+.row-bg{
+  margin:10px 0
+}
+.t-row {
+    margin-bottom: 20px;
+    
+  }
+  .t-col {
+    border-radius: 4px;
+  }
+  .bg-purple-dark {
+    background: #99a9bf;
+  }
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+    text-align: center;
+    line-height: 36px;
+  }
+  .row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+  }
+
+  .phone-frame{
+      /* position:fixed;
+      right:20px;
+      top:20px; */
+      width:375px;
+      height:667px;
+      background:#fff;
+      z-index:100
+  }
