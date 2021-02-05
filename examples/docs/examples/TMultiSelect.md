@@ -158,7 +158,7 @@
 ```vue
 
 <template>
-    <iframe class="phone-frame" src="http://localhost:8080/#/MultiSelect"></iframe>
+    <iframe class="phone-frame" src="https://bindy.github.io/t-component-ui-guide/site/#/MultiSelect"></iframe>
 </template>
 
 ```

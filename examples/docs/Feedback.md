@@ -68,7 +68,7 @@ export default{
 ```vue
 
 <template>
-    <iframe class="phone-frame" src="http://localhost:8080/#/alert"></iframe>
+    <iframe class="phone-frame" src="https://bindy.github.io/t-component-ui-guide/site/#/alert"></iframe>
 </template>
 
 ```
@@ -107,7 +107,7 @@ export default{
 ```vue
 
 <template>
-    <iframe class="phone-frame" src="http://localhost:8080/#/confirm"></iframe>
+    <iframe class="phone-frame" src="https://bindy.github.io/t-component-ui-guide/site/#/confirm"></iframe>
 </template>
 
 ```
@@ -141,5 +141,5 @@ export default{
 ```vue
 
 <template>
-    <iframe class="phone-frame" src="http://localhost:8080/#/loading"></iframe>
+    <iframe class="phone-frame" src="https://bindy.github.io/t-component-ui-guide/site/#/loading"></iframe>
 </template>

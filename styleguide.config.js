@@ -67,9 +67,14 @@ module.exports = {
 		path.join(__dirname, './examples/styleguide/style.css')
 
 	],
-	// webpackConfig: {
-	//   // custom config goes here
-	// },
+	webpackConfig: {
+	  // custom config goes here
+	  output: {
+	  	path:'/t-component-ui-guide',
+		publicPath:''
+	  }
+	},
+	
 	// exampleMode: 'expand',
 	defaultExample: false,
 	// serverPort:6666

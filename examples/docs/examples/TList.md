@@ -157,7 +157,7 @@
 ```vue
 
 <template>
-    <iframe class="phone-frame" src="http://localhost:8080/#/list"></iframe>
+    <iframe class="phone-frame" src="https://bindy.github.io/t-component-ui-guide/site/#/list"></iframe>
 </template>
 
 ```
@@ -166,7 +166,7 @@
 ```vue
 
 <template>
-    <iframe class="phone-frame" src="http://localhost:8080/#/list2"></iframe>
+    <iframe class="phone-frame" src="https://bindy.github.io/t-component-ui-guide/site/#/list2"></iframe>
 </template>
 
 ```
