@@ -2,8 +2,8 @@ import TMultiSelect from './src/TMultiSelect.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Option]
-let componentsH5 = [require('vant').Popup,require('vant').Tag,require('vant').Search,require('vant').CheckboxGroup,
+const componentsPC = [require('element-ui').Option]
+const componentsH5 = [require('vant').Popup,require('vant').Tag,require('vant').Search,require('vant').CheckboxGroup,
 require('vant').CellGroup,require('vant').Cell,require('vant').Checkbox,require('vant').TreeSelect]
 
 TMultiSelect.install = function(Vue) {
@@ -11,7 +11,6 @@ TMultiSelect.install = function(Vue) {
   let components
   if(apptype === 'H5'){
     components = componentsH5
-    Vue.use(require('vant').Lazyload)
   }else if(apptype === 'PC'){
     components = componentsPC
   }  

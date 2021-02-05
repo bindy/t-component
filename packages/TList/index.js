@@ -2,8 +2,8 @@ import TList from './src/TList.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 import TTable from '../TTable';
-let componentsPC = [...TTable._components['PC'],require('element-ui').Link]
-let componentsH5 = [require('vant').Row,require('vant').Col,require('vant').List,require('vant').SwipeCell
+const componentsPC = [...TTable._components['PC'],require('element-ui').Link]
+const componentsH5 = [require('vant').Row,require('vant').Col,require('vant').List,require('vant').SwipeCell
 ,require('vant').Button,require('vant').Cell,require('./src/CommonList.vue').default]
 
 TList.install = function(Vue) {
@@ -11,7 +11,6 @@ TList.install = function(Vue) {
   let components
   if(apptype === 'H5'){
     components = componentsH5
-    Vue.use(require('vant').Lazyload)
   }else if(apptype === 'PC'){
     components = componentsPC
   }  

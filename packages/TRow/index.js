@@ -2,15 +2,14 @@ import TRow from './src/TRow.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Row]
-let componentsH5 = [require('vant').Row]
+const componentsPC = [require('element-ui').Row]
+const componentsH5 = [require('vant').Row]
 
 TRow.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   let components
   if(apptype === 'H5'){
     components = componentsH5
-    Vue.use(require('vant').Lazyload)
   }else if(apptype === 'PC'){
     components = componentsPC
   }

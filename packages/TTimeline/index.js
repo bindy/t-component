@@ -2,15 +2,14 @@ import TTimeline from './src/TTimeline.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Timeline]
-let componentsH5 = [require('vant').Steps]
+const componentsPC = [require('element-ui').Timeline]
+const componentsH5 = [require('vant').Steps]
 
 TTimeline.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   let components
   if(apptype === 'H5'){
     components = componentsH5
-    Vue.use(require('vant').Lazyload)
   }else if(apptype === 'PC'){
     components = componentsPC
   }

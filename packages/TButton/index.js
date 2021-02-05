@@ -2,8 +2,8 @@ import TButton from './src/TButton.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Button]
-let componentsH5 = [require('vant').Button]
+const componentsPC = [require('element-ui').Button]
+const componentsH5 = [require('vant').Button]
 
 TButton.install = function(Vue) {
   

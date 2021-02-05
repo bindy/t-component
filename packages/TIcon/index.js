@@ -2,8 +2,8 @@ import TIcon from './src/TIcon.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Icon]
-let componentsH5 = [require('vant').Icon]
+const componentsPC = [require('element-ui').Icon]
+const componentsH5 = [require('vant').Icon]
 
 TIcon.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()

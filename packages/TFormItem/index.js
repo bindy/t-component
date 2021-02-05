@@ -2,8 +2,8 @@ import TFormItem from './src/TFormItem.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').FormItem,require('element-ui').Input]
-let componentsH5 = [require('vant').Field]
+const componentsPC = [require('element-ui').FormItem,require('element-ui').Input]
+const componentsH5 = [require('vant').Field]
 
 TFormItem.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()

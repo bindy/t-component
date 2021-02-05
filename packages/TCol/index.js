@@ -2,8 +2,8 @@ import TCol from './src/TCol.vue';
 import { DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Col]
-let componentsH5 = [require('vant').Col]
+const componentsPC = [require('element-ui').Col]
+const componentsH5 = [require('vant').Col]
 
 TCol.install = function (Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()

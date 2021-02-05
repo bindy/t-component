@@ -2,8 +2,8 @@ import TDatePicker from './src/TDatePicker.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').DatePicker]
-let componentsH5 = [require('vant').Calendar]
+const componentsPC = [require('element-ui').DatePicker]
+const componentsH5 = [require('vant').Calendar]
 
 TDatePicker.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()

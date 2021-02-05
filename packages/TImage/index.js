@@ -2,8 +2,8 @@ import TImage from './src/TImage.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Image]
-let componentsH5 = [require('vant').Image]
+const componentsPC = [require('element-ui').Image]
+const componentsH5 = [require('vant').Image]
 
 TImage.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()

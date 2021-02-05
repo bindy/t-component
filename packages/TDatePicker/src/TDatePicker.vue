@@ -159,7 +159,6 @@ export default {
         });
       } else if (this.apptype === "H5") {
         this.$refs["datepicker"].$on("confirm", (value) => {
-          console.log(value);
           let type = Object.prototype.toString.call(value);
           let curValue;
           if (type === "[object Date]") {

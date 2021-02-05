@@ -2,15 +2,14 @@ import TRadio from './src/TRadio.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Radio]
-let componentsH5 = [require('vant').Radio]
+const componentsPC = [require('element-ui').Radio]
+const componentsH5 = [require('vant').Radio]
 
 TRadio.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   let components
   if(apptype === 'H5'){
     components = componentsH5
-    Vue.use(require('vant').Lazyload)
   }else if(apptype === 'PC'){
     components = componentsPC
   }  

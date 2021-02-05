@@ -2,8 +2,8 @@ import TCollapseItem from './src/TCollapseItem.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').CollapseItem]
-let componentsH5 = [require('vant').CollapseItem]
+const componentsPC = [require('element-ui').CollapseItem]
+const componentsH5 = [require('vant').CollapseItem]
 
 TCollapseItem.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()

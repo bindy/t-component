@@ -2,15 +2,14 @@ import TTable from './src/TTable.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-let componentsPC = [require('element-ui').Table,require('element-ui').TableColumn,require('element-ui').Pagination]
-let componentsH5 = [require('element-ui').Table,require('element-ui').TableColumn,require('vant').Pagination]
+const componentsPC = [require('element-ui').Table,require('element-ui').TableColumn,require('element-ui').Pagination]
+const componentsH5 = [require('element-ui').Table,require('element-ui').TableColumn,require('vant').Pagination]
 
 TTable.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   let components
   if(apptype === 'H5'){
     components = componentsH5
-    Vue.use(require('vant').Lazyload)
   }else if(apptype === 'PC'){
     components = componentsPC
   }
