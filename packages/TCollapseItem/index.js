@@ -2,31 +2,22 @@ import TCollapseItem from './src/TCollapseItem.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-const componentsPC = [require('element-ui').CollapseItem]
-const componentsH5 = [require('vant').CollapseItem]
-
 TCollapseItem.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
-  let components
   if(apptype === 'H5'){
-    components = componentsH5
+    const CollapseItem = require('vant').CollapseItem
+    Vue.component(CollapseItem.name,CollapseItem)
+    require('vant/lib/collapse-item/style')
   }else if(apptype === 'PC'){
-    components = componentsPC
+    const CollapseItem = require('element-ui').CollapseItem
+    Vue.component(CollapseItem.name,CollapseItem)
+    require('element-ui/lib/theme-chalk/collapse-item.css')
   }
-  components.forEach((item)=>{
-    if(item.name.indexOf('van')> -1)
-        require(`vant/lib/${item.name.replace('van-','')}/style`);
-    if(item.name.indexOf('El')> -1){
-        let name = item.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
-        require(`element-ui/lib/theme-chalk/${name}.css`);
-      }
-    Vue.component(item.name,item)
-  })
   Vue.component(TCollapseItem.name, TCollapseItem);
 };
-TCollapseItem._components = {
-  'PC':[...componentsPC,TCollapseItem],
-  'H5':[...componentsH5,TCollapseItem],
-}
+// TCollapseItem._components = {
+//   'PC':[...componentsPC,TCollapseItem],
+//   'H5':[...componentsH5,TCollapseItem],
+// }
 export default TCollapseItem
 

@@ -1,8 +1,17 @@
+const path = require('path')
+const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
+const resolve = dir => path.resolve(__dirname,dir)
+console.log(resolve('packages'))
 module.exports = {
     pages:{
         index:{
             entry:'examples/main.js'
         }
     },
-    publicPath:process.env.NODE_ENV === 'production'?'/t-component-ui-guide/site':''
+    publicPath:IS_PROD?'/t-component-ui-guide/site':'',
+    
+    chainWebpack: config => {
+        config
+            .optimization.usedExports(true)
+  }
 }

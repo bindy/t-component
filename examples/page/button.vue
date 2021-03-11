@@ -7,6 +7,7 @@
         <t-button type="info">信息按钮</t-button>
         <t-button type="warning">警告按钮</t-button>
         <t-button type="danger">危险按钮</t-button>
+        
     </div>
 
     <div style="margin-top:20px">
@@ -24,6 +25,10 @@
         <t-button type="warning" round>圆角警告按钮</t-button>
         <t-button type="danger" round>圆角危险按钮</t-button>
     </div>
+
+    <!-- <div style="margin-top:20px">
+        <t-button _pc-circle >圆形按钮</t-button>
+    </div> -->
 
     <h3>按钮大小</h3>
     <div>

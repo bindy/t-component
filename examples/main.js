@@ -48,7 +48,8 @@ const components = [TButton,
   TSwitch,
   TTable,
   TTimeline,
-  TTimelineItem];
+  TTimelineItem
+];
 
 components.forEach((item) => Vue.use(item))
 Vue.prototype.$TAlert = TAlert

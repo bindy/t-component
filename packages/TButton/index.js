@@ -2,33 +2,24 @@ import TButton from './src/TButton.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-const componentsPC = [require('element-ui').Button]
-const componentsH5 = [require('vant').Button]
-
 TButton.install = function(Vue) {
-  
-  const apptype =   Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType() 
+  const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType() 
   Vue.prototype.apptype = apptype
-  let components
-  if(apptype === 'H5'){
-    components = componentsH5
-  }else if(apptype === 'PC'){
-    components = componentsPC
+  if(apptype === 'PC'){
+    Vue.component('ElButton',function(resolve){
+      require(['element-ui/packages/button','element-ui/lib/theme-chalk/button.css'],resolve)
+    })
   }
-  components.forEach((item)=>{
-    if(item.name.indexOf('van')> -1)
-        require(`vant/lib/${item.name.replace('van-','')}/style`);
-    if(item.name.indexOf('El')> -1){
-        let name = item.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
-        require(`element-ui/lib/theme-chalk/${name}.css`);
-    }
-    Vue.component(item.name,item)
-  })
+  else if(apptype === 'H5'){
+    Vue.component('van-button',function(resolve){
+      require(['vant/lib/button','vant/lib/button/style'],resolve)
+    })
+  }
   Vue.component(TButton.name, TButton);
 };
-TButton._components = {
-  'PC':[...componentsPC,TButton],
-  'H5':[...componentsH5,TButton],
-}
+// TButton._components = {
+//   'PC':[...componentsPC,TButton],
+//   'H5':[...componentsH5,TButton],
+// }
 export default TButton;
 

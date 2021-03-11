@@ -1,12 +1,12 @@
 <template>
-
+<div>
 <component :is="tagName"  v-bind="attrObj" >
     
     <t-radio v-for="(name,index) in labelNames" :key="index" :size="size" :border="attrObj['border']" :labelName="name" @rchange="changeVal(name)">
         {{labelTexts[index] }}
     </t-radio>
 </component>
-
+</div>
 </template>
 
 <script>

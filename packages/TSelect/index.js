@@ -2,32 +2,40 @@ import TSelect from './src/TSelect.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-const componentsPC = [require('element-ui').Select,require('element-ui').Option,require('element-ui').Cascader]
-const componentsH5 = [require('vant').Popup,require('vant').Picker,require('vant').Icon]
+const componentsPC = ['Select','Option','Cascader']
+const componentsH5 = ['Popup','Picker','Icon']
 
 TSelect.install = function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
-  let components
   if(apptype === 'H5'){
-    components = componentsH5
+    componentsH5.forEach((item)=>{
+      const uiItem = require('vant')[item]
+      if(uiItem.name.indexOf('van')> -1)
+          require(`vant/lib/${uiItem.name.replace('van-','')}/style`);
+      if(uiItem.name.indexOf('El')> -1){
+          let name = uiItem.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
+          require(`element-ui/lib/theme-chalk/${name}.css`);
+        }
+      Vue.component(uiItem.name,uiItem)
+    })
   }else if(apptype === 'PC'){
-    components = componentsPC
-  }
+    componentsPC.forEach((item)=>{
+      const uiItem = require('element-ui')[item]
+      if(uiItem.name.indexOf('van')> -1)
+          require(`vant/lib/${uiItem.name.replace('van-','')}/style`);
+      if(uiItem.name.indexOf('El')> -1){
+          let name = uiItem.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
+          require(`element-ui/lib/theme-chalk/${name}.css`);
+        }
+      Vue.component(uiItem.name,uiItem)
+    })
+  }  
 
-  components.forEach((item)=>{
-    if(item.name.indexOf('van')> -1)
-        require(`vant/lib/${item.name.replace('van-','')}/style`);
-    if(item.name.indexOf('El')> -1){
-        let name = item.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
-        require(`element-ui/lib/theme-chalk/${name}.css`);
-      }
-    Vue.component(item.name,item)
-  })
   Vue.component(TSelect.name, TSelect);
 };
-TSelect._components = {
-  'PC':[...componentsPC,TSelect],
-  'H5':[...componentsH5,TSelect],
-}
+// TSelect._components = {
+//   'PC':[...componentsPC,TSelect],
+//   'H5':[...componentsH5,TSelect],
+// }
 export default TSelect
 

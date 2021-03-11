@@ -1,5 +1,5 @@
 const configs = {
-    'apptype':''
+    'apptype':'',
 }
 
 export default configs

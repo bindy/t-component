@@ -44,6 +44,7 @@ export default {
                 if(this.size === 'default'){
                     _size = 'medium'
                 }
+                attrs['circle'] = this._pcCircle
             } else if (this.apptype === 'H5') {
                 if (this.size === 'default') {
                     _size = 'normal'
@@ -127,6 +128,10 @@ export default {
         nativeType: {
             type: String,
             default: () => 'button'
+        },
+        _pcCircle:{
+            type: Boolean,
+            default: () => false
         }
     },
     beforeMount() {
