@@ -2,18 +2,18 @@ import TButton from './src/TButton.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-TButton.install = function(Vue) {
+TButton.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType() 
   Vue.prototype.apptype = apptype
   if(apptype === 'PC'){
-    Vue.component('ElButton',function(resolve){
-      require(['element-ui/packages/button','element-ui/lib/theme-chalk/button.css'],resolve)
-    })
+    const button =  (await import('element-ui/packages/button')).default
+    await import('element-ui/lib/theme-chalk/button.css')
+    Vue.component(button.name,button)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-button',function(resolve){
-      require(['vant/lib/button','vant/lib/button/style'],resolve)
-    })
+    const button =  (await import('vant/lib/button')).default
+    await import('vant/lib/button/style')
+    Vue.component(button.name,button)
   }
   Vue.component(TButton.name, TButton);
 };

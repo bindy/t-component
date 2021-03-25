@@ -2,17 +2,20 @@ import TCollapseItem from './src/TCollapseItem.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-TCollapseItem.install = function(Vue) {
+TCollapseItem.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
-  if(apptype === 'H5'){
-    const CollapseItem = require('vant').CollapseItem
-    Vue.component(CollapseItem.name,CollapseItem)
-    require('vant/lib/collapse-item/style')
-  }else if(apptype === 'PC'){
-    const CollapseItem = require('element-ui').CollapseItem
-    Vue.component(CollapseItem.name,CollapseItem)
-    require('element-ui/lib/theme-chalk/collapse-item.css')
+  
+  if(apptype === 'PC'){
+    const tcollapseitem =  (await import('element-ui/packages/collapse-item')).default
+    await import('element-ui/lib/theme-chalk/collapse-item.css')
+    Vue.component(tcollapseitem.name,tcollapseitem)
   }
+  else if(apptype === 'H5'){
+    const tcollapseitem =  (await import('vant/lib/collapse-item')).default
+    await import('vant/lib/collapse-item/style')
+    Vue.component(tcollapseitem.name,tcollapseitem)
+  }
+
   Vue.component(TCollapseItem.name, TCollapseItem);
 };
 // TCollapseItem._components = {

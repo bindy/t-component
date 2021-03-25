@@ -3,17 +3,17 @@ import {DeviceInstance } from '../utils'
 import config from '../config'
 
 
-TRow.install = function(Vue) {
+TRow.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   if(apptype === 'PC'){
-    Vue.component('ElRow',function(resolve){
-      require(['element-ui/packages/row','element-ui/lib/theme-chalk/row.css'],resolve)
-    })
+    const row =  (await import('element-ui/packages/row')).default
+    await import('element-ui/lib/theme-chalk/row.css')
+    Vue.component(row.name,row)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-row',function(resolve){
-      require(['vant/lib/row','vant/lib/row/style'],resolve)
-    })
+    const row =  (await import('vant/lib/row')).default
+    await import('vant/lib/row/style')
+    Vue.component(row.name,row)
   }
 
   Vue.component(TRow.name, TRow);

@@ -2,17 +2,17 @@ import TCol from './src/TCol.vue';
 import { DeviceInstance } from '../utils'
 import config from '../config'
 
-TCol.install = function (Vue) {
+TCol.install = async function (Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   if(apptype === 'PC'){
-    Vue.component('ElCol',function(resolve){
-      require(['element-ui/packages/col','element-ui/lib/theme-chalk/col.css'],resolve)
-    })
+    const col =  (await import('element-ui/packages/col')).default
+    await import('element-ui/lib/theme-chalk/col.css')
+    Vue.component(col.name,col)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-col',function(resolve){
-      require(['vant/lib/col','vant/lib/col/style'],resolve)
-    })
+    const col =  (await import('vant/lib/col')).default
+    await import('vant/lib/col/style')
+    Vue.component(col.name,col)
   }
 
   Vue.component(TCol.name, TCol);

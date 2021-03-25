@@ -1,38 +1,37 @@
 import TTable from './src/TTable.vue';
-import {DeviceInstance } from '../utils'
+import { DeviceInstance } from '../utils'
 import config from '../config'
 
-const componentsPC = ['Table','TableColumn','Pagination','Icon']
-const componentsH5 = ['Table','TableColumn']
+const componentsPC = ['Table', 'TableColumn', 'Pagination']
 
-TTable.install = function(Vue) {
+TTable.install = async function (Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
-  if(apptype === 'PC'){
-    componentsPC.forEach((item)=>{
+  //['Table', 'TableColumn', 'Pagination'] 暂时不支持按需
+  if (apptype === 'PC') {
+    componentsPC.forEach((item) => {
       const uiItem = require('element-ui')[item]
-      if(uiItem.name.indexOf('van')> -1)
-          require(`vant/lib/${uiItem.name.replace('van-','')}/style`);
-      if(uiItem.name.indexOf('El')> -1){
-          let name = uiItem.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
-          require(`element-ui/lib/theme-chalk/${name}.css`);
-        }
-      Vue.component(uiItem.name,uiItem)
+      Vue.component(uiItem.name, uiItem)
     })
+    await import('element-ui/lib/theme-chalk/table.css')
+    await import('element-ui/lib/theme-chalk/table-column.css')
+    await import('element-ui/lib/theme-chalk/pagination.css')
+
+    const icon = (await import('element-ui/packages/icon')).default
+    await import('element-ui/lib/theme-chalk/icon.css')
+    Vue.component(icon.name, icon)
   }
-  else if(apptype === 'H5'){
-    componentsH5.forEach((item)=>{
+  else if (apptype === 'H5') {
+    const pagination = (await import('vant/lib/pagination')).default
+    await import('vant/lib/pagination/style')
+    Vue.component(pagination.name, pagination)
+
+    componentsPC.forEach((item) => {
       const uiItem = require('element-ui')[item]
-      if(uiItem.name.indexOf('van')> -1)
-          require(`vant/lib/${uiItem.name.replace('van-','')}/style`);
-      if(uiItem.name.indexOf('El')> -1){
-          let name = uiItem.name.replace(/([A-Z])/g,"-$1").toLowerCase().replace('-el-','');
-          require(`element-ui/lib/theme-chalk/${name}.css`);
-        }
-      Vue.component(uiItem.name,uiItem)
+      Vue.component(uiItem.name, uiItem)
     })
-    Vue.component('van-pagination',function(resolve){
-      require(['vant/lib/pagination','vant/lib/pagination/style'],resolve)
-    })
+    await import('element-ui/lib/theme-chalk/table.css')
+    await import('element-ui/lib/theme-chalk/table-column.css')
+    
   }
 
   Vue.component(TTable.name, TTable);

@@ -2,17 +2,17 @@ import TIcon from './src/TIcon.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-TIcon.install = function(Vue) {
+TIcon.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   if(apptype === 'PC'){
-    Vue.component('ElIcon',function(resolve){
-      require(['element-ui/packages/icon','element-ui/lib/theme-chalk/icon.css'],resolve)
-    })
+    const icon =  (await import('element-ui/packages/icon')).default
+    await import('element-ui/lib/theme-chalk/icon.css')
+    Vue.component(icon.name,icon)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-icon',function(resolve){
-      require(['vant/lib/icon','vant/lib/icon/style'],resolve)
-    })
+    const icon =  (await import('vant/lib/icon')).default
+    await import('vant/lib/icon/style')
+    Vue.component(icon.name,icon)
   }
 
   Vue.component(TIcon.name, TIcon);

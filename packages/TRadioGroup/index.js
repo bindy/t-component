@@ -2,17 +2,18 @@ import TRadioGroup from './src/TRadioGroup.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-TRadioGroup.install = function(Vue) {
+TRadioGroup.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
+  
   if(apptype === 'PC'){
-    Vue.component('ElRadioGroup',function(resolve){
-      require(['element-ui/packages/radio-group','element-ui/lib/theme-chalk/radio-group.css'],resolve)
-    })
+    const tradiogroup =  (await import('element-ui/packages/radio-group')).default
+    await import('element-ui/lib/theme-chalk/radio-group.css')
+    Vue.component(tradiogroup.name,tradiogroup)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-radio-group',function(resolve){
-      require(['vant/lib/radio-group','vant/lib/radio-group/style'],resolve)
-    })
+    const tradiogroup =  (await import('vant/lib/radio-group')).default
+    await import('vant/lib/radio-group/style')
+    Vue.component(tradiogroup.name,tradiogroup)
   }
 
   Vue.component(TRadioGroup.name, TRadioGroup);

@@ -3,17 +3,17 @@ import {DeviceInstance } from '../utils'
 import config from '../config'
 
 
-TSwitch.install = function(Vue) {
+TSwitch.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
   if(apptype === 'PC'){
-    Vue.component('ElSwitch',function(resolve){
-      require(['element-ui/packages/switch','element-ui/lib/theme-chalk/switch.css'],resolve)
-    })
+    const tswitch =  (await import('element-ui/packages/switch')).default
+    await import('element-ui/lib/theme-chalk/switch.css')
+    Vue.component(tswitch.name,tswitch)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-switch',function(resolve){
-      require(['vant/lib/switch','vant/lib/switch/style'],resolve)
-    })
+    const tswitch =  (await import('vant/lib/switch')).default
+    await import('vant/lib/switch/style')
+    Vue.component(tswitch.name,tswitch)
   }
 
   Vue.component(TSwitch.name, TSwitch);

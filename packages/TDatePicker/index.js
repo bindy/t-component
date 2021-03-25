@@ -2,16 +2,20 @@ import TDatePicker from './src/TDatePicker.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-TDatePicker.install = function(Vue) {
+TDatePicker.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
-  if(apptype === 'H5'){
-    const Calendar = require('vant').Calendar
-    Vue.component(Calendar.name,Calendar)
-    require('vant/lib/calendar/style')
-  }else if(apptype === 'PC'){
+
+  if(apptype === 'PC'){
+    // const DatePicker =  (await import('element-ui/packages/date-picker')).default
+    // DatePicker 暂时无法实现按需
     const DatePicker = require('element-ui').DatePicker
+    await import('element-ui/lib/theme-chalk/date-picker.css')
     Vue.component(DatePicker.name,DatePicker)
-    require('element-ui/lib/theme-chalk/date-picker.css')
+  }
+  else if(apptype === 'H5'){
+    const calendar =  (await import('vant/lib/calendar')).default
+    await import('vant/lib/calendar/style')
+    Vue.component(calendar.name,calendar)
   }
   Vue.component(TDatePicker.name, TDatePicker);
 };

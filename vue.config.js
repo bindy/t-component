@@ -1,7 +1,4 @@
-const path = require('path')
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
-const resolve = dir => path.resolve(__dirname,dir)
-console.log(resolve('packages'))
 module.exports = {
     pages:{
         index:{

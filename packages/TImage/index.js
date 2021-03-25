@@ -2,17 +2,18 @@ import TImage from './src/TImage.vue';
 import {DeviceInstance } from '../utils'
 import config from '../config'
 
-TImage.install = function(Vue) {
+TImage.install = async function(Vue) {
   const apptype = Vue.prototype.apptype || config['apptype'] || DeviceInstance().getType()
+  
   if(apptype === 'PC'){
-    Vue.component('ElImage',function(resolve){
-      require(['element-ui/packages/image','element-ui/lib/theme-chalk/image.css'],resolve)
-    })
+    const image =  (await import('element-ui/packages/image')).default
+    await import('element-ui/lib/theme-chalk/image.css')
+    Vue.component(image.name,image)
   }
   else if(apptype === 'H5'){
-    Vue.component('van-image',function(resolve){
-      require(['vant/lib/image','vant/lib/image/style'],resolve)
-    })
+    const image =  (await import('vant/lib/image')).default
+    await import('vant/lib/image/style')
+    Vue.component(image.name,image)
   }
  
   Vue.component(TImage.name, TImage);
